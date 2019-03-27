@@ -1,6 +1,10 @@
 {
-    "path" : "C:/Users/user/Desktop/MR.-R",
+    "path" : "C:/Users/user/Desktop/R語言/MR.-R",
     "sortOrder" : [
+        {
+            "ascending" : false,
+            "columnIndex" : 4
+        },
         {
             "ascending" : true,
             "columnIndex" : 2

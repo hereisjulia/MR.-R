@@ -1,0 +1,139 @@
+---
+title: '2019-03-27'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+#套件lubridate
+```{r}
+library(lubridate)
+```
+
+#創建Date Time物件
+```{r}
+dtObject<-ymd_hms("1970-01-01 00:02:53") 
+```
+#創建Date Time向量
+```{r}
+dtObjectVector<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+```
+#看Date Time分類
+```{r}
+class(dtObject)
+```
+```{r}
+dtObject
+```
+```{r}
+Sys.timezone()
+```
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+```
+
+```{r}
+LisbonDateTime <- with_tz(twDateTime,tzone="Europe/Lisbon")
+```
+
+```{r}
+twDateTime<-mdy_hms("3-14-2019 8:18:47") 
+```
+
+```{r}
+testDate1<-ymd("2018-09-11")
+```
+```{r}
+testDate2<-mdy("March 3, 2019")
+```
+
+
+```{r}
+as.integer(ymd("1970-01-01"))
+```
+```{r}
+as.integer(ymd("1970-01-31"))
+```
+```{r}
+as.integer(ymd("2019-03-27"))
+```
+
+```{r}
+a <- c(1, 5, -3)
+b <- c(0.5, 12, 2)
+```
+
+```{r}
+aL <- c(1L, 5L, -3L)
+bL <- c(-2L, -4L, 8L)
+```
+
+```{r}
+class(a+bL)
+class(aL+bL)
+class(a-bL)
+class(aL-bL)
+```
+
+#讓a中的數字都加4 可以先設一個c=4
+```{r}
+c <- 4
+c+a
+```
+#次方為^或**
+#餘數為%%
+```{r}
+a^b
+a %% b
+```
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+```
+
+```{r}
+day1<-ymd("2019-08-11")
+day2<-ymd("2000-02-01")
+```
+
+```{r}
+day2-day1
+```
+
+```{r}
+startingDate <- ymd("2000-02-17")
+
+```
+```{r}
+startingDate + years(1)
+```
+```{r}
+startingDate + dyears(1)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
