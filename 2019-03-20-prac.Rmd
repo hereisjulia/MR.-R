@@ -1,0 +1,141 @@
+---
+title: '2019-03-20'
+author: ""
+date: "3/20/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+dialogue <- c('小明說："明天不用上課。"',
+               '小花說："真的嗎？"')
+
+cat(dialogue, sep="\n")
+```
+ 
+```{r}
+dialogue <- c("小明說：'明天不用上課。'",
+               "小花說：'真的嗎？'")
+
+cat(dialogue, sep="\n")
+```
+
+```{r}
+aLogical <- c(T,TRUE,F,FALSE,FALSE)
+class(aLogical)
+```
+
+```{r}
+# 加總向量內的所有元素值。
+sum(aLogical)
+```
+
+#factor
+```{r}
+studentMajors <- factor(
+  c("經濟系", "經濟系", "法律系")
+)
+```
+```{r}
+as.integer(studentMajors)
+```
+```{r}
+levels(studentMajors)
+```
+```{r}
+Borncities <- factor(
+  c("台北市","台北市","台中市","台北市","台中市")
+)
+```
+```{r}
+as.integer(Borncities)
+```
+```{r}
+levels(Borncities)
+```
+```{r}
+trueInteger <- as.integer(Borncities)
+```
+```{r}
+class(trueInteger)
+```
+```{r}
+sum(trueInteger)
+```
+
+#stringInteger的種類還是character故不能運算
+
+```{r}
+stringInteger <- c("1","2","-11")
+class(stringInteger)
+```
+#trueInteger是interger可運算
+#須將stringInteger轉成integer
+```{r}
+trueInteger <- as.integer(stringInteger)
+class(trueInteger) 
+```
+```{r}
+sum(trueInteger)
+```
+
+#Date and Time
+
+#用library把lubridate從資料庫中叫出來(套件都要)
+
+```{r}
+library(lubridate)
+dtObject<-ymd_hms("1970-01-01 00:02:53")
+```
+
+#Y年m月d日-h時m分s秒
+
+#使用c(...)形成向量
+
+```{r}
+dtObjectVector<-ymd_hms(
+  c("1970-01-01 00:02:53",
+    "1980-02-11 11:25:22")
+)
+```
+```{r}
+class(dtObject)
+```
+#此為UTC時間(經度0度)
+```{r}
+dtObject
+```
+#看電腦是用什麼方式儲存,"double"表非整數
+```{r}
+typeof(dtObject)
+```
+#顯示目前電腦時區設定
+```{r}
+Sys.timezone()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
