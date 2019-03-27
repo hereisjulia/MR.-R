@@ -1,0 +1,57 @@
+---
+title: '2019-03-13'
+author: "林茂廷"
+date: "03/13/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#how to use <-
+Create an object a equal to 2
+Create an object b equal to 3
+
+```{r}
+a <- 2
+3 -> b
+```
+
+```{r}
+c=47
+
+65+c
+```
+
+```{r}
+`c`
+```
+#when to use `
+
+物件不可用數字開頭
+故要加反頓點`
+
+```{r}
+`107樵學期成績`<-100
+```
+```{r}
+`stupidgoose`<-87
+`pinpinpig`<-87
+```
+
+#numeric class
+利用class()查詢物件類別
+L代表整數
+
+```{r}
+class(a)
+a2<-5L
+class(a2)
+```
+
+```{r}
+avector<-c(5,6,7)
+a2vector<-c(5L,6L,7L)
+```
+
