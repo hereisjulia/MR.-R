@@ -116,8 +116,81 @@ startingDate + years(1)
 ```{r}
 startingDate + dyears(1)
 ```
+```{r}
+ymd("2000-02-01") -> startingDate
+ymd("2019-08-11") -> endingDate
+endingDate - startingDate
+```
+#relation
+```{r}
+x <- 5
+y <- 7
+```
+```{r}
+x2 <- c(1,5,10)
+y2 <- c(-1,5,20)
+```
+
+```{r}
+x>=y
+x<y
+```
+```{r}
+x2>y2
+x2<y2
+```
+
+#不等於"!="
+#屬於"%in%"
+```{r}
+x4 <- c(1,5,8)
+y4 <- c(5,8)
+
+x4 %in% y4
+```
+```{r}
+x5 <- c("台北市","新北市","高雄市")
+y5 <- c("台北市","新北市")
+
+x5 %in% y5
+```
+```{r}
+x6 <- c("pin","chifu笨","醜婷")
+y6 <- c("chifu笨","醜婷")
+
+x6 %in% y6
+```
+
+#資料有缺失，在R裡會記成NA(即not available)
+```{r}
+x2 <- c(1,NA,10)
+y2 <- c(-1,NA,20)
+
+x3 <- c(NA,"小花")
+y3 <- c(NA,"小華")
+```
+
+#NA和NA不相等
+```{r}
+x2==y2
+```
+
+#要知道向量內各元素值是否NA，可使用
+```{r}
+is.na(x2)
+```
+#na.rm表示是否移開缺失資料
+```{r}
+sum(x2)
+sum(x2,na.rm=T)
+sum(x2,na.rm=F)
+```
 
 
+#特別的缺失資料NaN (即not a number)，出現在沒有定義的數學運算上
+```{r}
+0/0
+```
 
 
 

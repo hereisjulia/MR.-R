@@ -1,0 +1,16 @@
+"0","x5 <- c(""台北市"",""新北市"",""高雄市"")"
+"2","Warning message:
+"
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"
+"0","y5 <- c(""台北市"",""新北市"")"
+"0","x5 %in% y5"
+"1","[1]"
+"1","  TRUE"
+"1","  TRUE"
+"1"," FALSE"
+"1","
+"
