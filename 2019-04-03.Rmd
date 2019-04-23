@@ -1,0 +1,223 @@
+---
+title: "2019-04-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(readr)
+exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
+currency <- exData2$幣別
+```
+#head會顯示物件前6個元素
+```{r}
+head(currency)
+```
+#資料一進來沒有被列為factor,所以就沒有levels
+```{r}
+class(currency)
+levels(currency)
+```
+#要將其分類更正為factor(右邊為舊物件,左邊為新)
+#即可查詢其中有幾種類別
+```{r}
+currency<- as.factor(currency)
+class(currency)
+levels(currency)
+```
+#length()用來數向量內的元素個數(向量長度)
+```{r}
+length(levels(currency))
+```
+#currency中有多少筆資料是日圓
+```{r}
+sum(currency=='日圓JPY/USD')
+```
+
+
+
+#5.4-LOGICAL OPERATER
+
+  ＆:and
+  ｜:or
+  ！:否定
+  
+```{r}
+x5 <- c('台北市','新北市','高雄市')
+greatTaipei <- c('台北市','新北市')
+
+x5 %in% greatTaipei
+```
+```{r}
+!(x5 %in% greatTaipei)
+```
+```{r}
+y5 <- c('女','男','女')
+y5=="女"
+!(y5=="女")
+```
+```{r}
+(x5 %in% greatTaipei) & (y5=="女")
+(x5 %in% greatTaipei) | (y5=="女")
+xor(x5 %in% greatTaipei, y5=="女")
+```
+>xor(x, y)表x或y,但不是x且y
+
+#想知道資料中第幾筆元素為TRUE
+>求來自greatTaipei且又是女性
+```{r}
+which((x5 %in% greatTaipei) & (y5=="女"))
+```
+
+
+#綜合練習
+```{r}
+library(readr)
+exData2 <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv")
+date <- as.character(exData2$期間)
+currency <- exData2$幣別
+exchangeRate <- exData2$匯率
+```
+
+>1.請把date的class存成date class
+
+```{r}
+head(date)
+class(date)
+```
+ 要使電腦認得年月日,需要lubridate
+```{r}
+library(lubridate)
+date<- ymd(date)
+```
+```{r}
+class(date)
+```
+
+>2.1980-08-01之後的資料有多少筆
+
+```{r}
+isAfter19800801 <-
+  date >= ymd("1980-08-01")
+isAfter19800801
+```
+ 和1970年1月1日相差
+ 
+ FALSE表示在1980-08-01前
+```{r}
+head(as.integer(date))
+as.integer(ymd("1980-08-01"))
+head(date >=ymd("1980-08-01"))
+```
+
+```{r}
+class(isAfter19800801)
+```
+```{r}
+sum(isAfter19800801)
+```
+
+>3.幣別為“歐元USD/EUR”的資料有多少筆。
+
+```{r}
+head(currency)
+```
+```{r}
+head(currency == "歐元USD/EUR")
+
+isEURO <- currency=="歐元USD/EUR"
+```
+```{r}
+sum(isEURO)
+```
+
+>4.exchangeRate有多少筆NA
+
+```{r}
+isExchangeRateNA <-
+  is.na(exchangeRate)
+sum(isExchangeRateNA)
+```
+
+>5.排除NA後，幣別為“歐元USD/EUR”的資料有多少筆。
+
+```{r}
+isNotNA <- !is.na(exchangeRate)
+isEuro <- currency== "歐元USD/EUR"
+```
+```{r}
+satisfyBoth <- isNotNA & isEuro
+sum(satisfyBoth)
+```
+
+#綜合練習2
+
+```{r}
+library(readr)
+transcriptDataFinal <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+courseType <- transcriptDataFinal$`必選修類別（必∕選∕通）`
+major <- transcriptDataFinal$學系
+studentID <- transcriptDataFinal$學號
+grade <- transcriptDataFinal$學期成績
+```
+>1.有多少筆資料是來自經濟學系。
+
+```{r}
+sum(major=="經濟學系")
+```
+>2.請問學號“5bdS6977b”同學修了多少課。
+
+```{r}
+sum(studentID=="5bdS6977b")
+```
+>3.請問學號“5bdS6977b”有多少科成績及格。
+
+```{r}
+sum( studentID=="5bdS6977b" & grade >=60)
+```
+>4.有多少筆資料來自經濟學系學生且為選修課。
+
+```{r}
+sum( major=="經濟學系" & courseType=="選")
+```
+>5.在經濟學系學生且必修課程中，成積不及格佔多少比例。
+
+1.經濟學系學生且必修課程
+```{r}
+sum(
+  major=="經濟學系" &
+    courseType=="必"
+  ) ->b
+```
+2.成積不及格
+```{r}
+sum( major=="經濟學系" &
+       courseType=="必" &
+       grade<60
+     ) ->a
+```
+```{r}
+a/b
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

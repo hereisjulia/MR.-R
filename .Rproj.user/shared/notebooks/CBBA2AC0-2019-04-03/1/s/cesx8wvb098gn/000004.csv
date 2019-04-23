@@ -1,0 +1,20 @@
+"0","library(readr)"
+"2","package ¡¥readr¡¦ was built under R version 3.5.3"
+"2","Warning message:
+"
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"
+"0","exData2 <- read_csv(""https://raw.githubusercontent.com/tpemartin/github-data/master/exData2.csv"")"
+"2","`curl` package not installed, falling back to using `url()`
+"
+"2","Parsed with column specification:
+cols(
+  ´Á¶¡ = [34mcol_date(format = """")[39m,
+  ¹ô§O = [31mcol_character()[39m,
+  ¶×²v = [32mcol_double()[39m
+)
+"
+"0","currency <- exData2$å¹£åˆ¥"
