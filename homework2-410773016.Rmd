@@ -1,0 +1,173 @@
+---
+title: "homework2"
+date: "2019-04-19"
+output: html_document
+params:
+  studentID: "410773016"
+  studentName: "蔡亞樵"
+---
+
+引入所需packages
+```{r}
+library(lubridate)
+library(stringr)
+library(dplyr)
+```
+
+一更改物件元素名稱
+
+1.1將元素名稱「學年平均成績」改成「平均成績」。
+
+names()可以顯示物件內元素名稱，names() <-則可以用來改變元素名稱
+```{r}
+studentRecord <-
+  list(
+    學號="410073058",
+    姓名="王小明",
+    性別="男",
+    學年平均成績=list(
+      一年級=88,
+      二年級=90.3,
+      三年級=92,
+      四年級=95
+    )
+  )
+```
+
+```{r}
+names(studentRecord)[c(4)] <- c("平均成績")
+studentRecord
+```
+1.2將“一年級”，“二年級”，“三年級”，“四年級”改成“一”，“二”，“三”，“四”。
+```{r}
+studentRecord[[4]]
+names(studentRecord[[4]]) <- c("一","二","三","四")
+studentRecord
+```
+
+二
+
+```{r}
+library(httr)
+commitCheck <- content(GET("https://api.github.com/repos/rstudio/rstudio/commits"))
+```
+
+2.1 取出commitCheck第8個元素底下的commit元素，再拿出它底下的committer元素，再拿出它底下的date元素的第一個值，存成commit8Date答案物件（為character class) 。
+```{r}
+commitCheck[[8]][["commit"]][["committer"]][["date"]][[1]]
+commit8Date <- commitCheck[[8]][["commit"]][["committer"]][["date"]][[1]]
+class(commit8Date)
+commit8Date
+```
+
+2.2 commit8Date的日期時間為UTC時間，將它轉成台灣時間的date time class並存在答案物件commit8TWDate。（最後一行最忘了打答案物件）
+```{r}
+library(lubridate)
+ymd_hms(commit8Date) -> commit8Date
+with_tz(commit8Date, tzone = "Asia/Taipei") -> commit8Date
+commit8Date
+```
+
+2.3 原本commitCheck裡的元素沒有命名（names(commitCheck)會顯示NULL），請將這些元素依其位置順序命名為“commit1”,“commit2”, “commit3”等等。此題最後一行請輸入commitCheck，老師改題時會看commitCheck的names有沒有正確更改。）(hint: c(1:5)可創出c(1,2,3,4,5); length(commitCheck)會給你commitCheck元素個數)
+```{r}
+length(commitCheck)
+```
+```{r}
+names(commitCheck) <- c("commit" 1:30)
+
+```
+
+2.4 先安裝purrr套件，接著執行以下程式得到allCommitDatesList這個物件，裡頭每個元素都是每一次commit的日期時間。
+
+```{r}
+library(purrr)
+map(commitCheck,~.[[3]][[2]][[3]][[1]]) -> allCommitDatesList
+unlist(allCommitDatesList) -> allCommitDatesList
+class(allCommitDatesList)
+allCommitDatesList
+```
+
+2.5 allCommitDates是UTC時區的時間文字字串，請將它轉成date time格式，再改成台灣時區後，存在allCommitDatesTW答案物件。（最後一行最忘了打答案物件）
+
+```{r}
+library(lubridate)
+ymd_hms(allCommitDatesList) -> allCommitDatesList
+with_tz(allCommitDatesList, tzone = "Asia/Taipei") ->allCommitDatesTW
+allCommitDatesTW
+```
+
+2.6 使用hour()及minute()可分別將date time元素的「小時」及「分鐘」取出（其中小時是24小時制）。請創立一個logical vector答案物件logicWithinTimeFrame，各個元素值為TRUE時代表allCommitDatesTW的時間落在凌晨4點30到凌晨6點30之間（含起迄時點）。（最後一行最忘了打答案物件）
+
+```{r}
+hour(allCommitDatesTW) ->H
+minute(allCommitDatesTW) ->M
+(H<=6 & H>=4) ->a
+(H=4 & M<=30) ->b
+(H=6 & M>=30) ->c
+(a &!b &!c) -> logicWithinTimeFrame
+logicWithinTimeFrame
+```
+
+三
+```{r}
+library(readr)
+
+transcriptData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/transcriptDataFinal.csv")
+```
+
+3.1 請查詢transcriptData元素名稱，並將它們存在名為variableNames的character vector答案物件裡。（最後一行最忘了打答案物件
+```{r}
+names(transcriptData) -> variableNames
+class(variableNames)
+variableNames
+```
+
+
+3.2 variableNames裡每個值是這資料有的欄位名稱，我們常稱之為變數名稱。請創造一個logic vector名為logicFromEcon的答案物件，其各別元素值為TRUE當「學系」變數裡的對應元素值為“經濟學系”。（最後一行最忘了打答案物件）
+```{r}
+transcriptData[3]=="經濟學系" ->logicFromEcon
+logicFromEcon
+```
+
+
+3.3 請由transcriptData中選出“學號”,“學分數”,“必選修類別（必∕選∕通）”變數（使用[.] extraction）並存成transcriptPartialData答案物件。（最後一行最忘了打答案物件）
+```{r}
+transcriptData[c(1,7,8)] -> transcriptPartialData
+transcriptPartialData
+```
+
+3.4 創立一個新的list答案物件叫transcriptPartialDataEcon，裡頭有“學號”,“學分數”,“必選修類別（必∕選∕通）”三個元素名稱，各別元素內容來自transcirptPartialData中所對應的變數名稱，但只保留來自經濟學系學生的資料（我們稱transcriptPartialDataEcon為transcriptData的子樣本）。 (hint: 活用3.2題結果) （最後一行最忘了打答案物件）
+```{r}
+transcriptData[]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
