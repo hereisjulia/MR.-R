@@ -103,8 +103,8 @@ class(date)
 
 ```{r}
 isAfter19800801 <-
-  date >= ymd("1980-08-01")
-isAfter19800801
+  date > ymd("1980-08-01")
+sum(isAfter19800801)
 ```
  和1970年1月1日相差
  
