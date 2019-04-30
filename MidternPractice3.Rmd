@@ -1,0 +1,124 @@
+---
+title: "midtern-practice3"
+output: html_document
+---
+
+
+
+
+六
+
+#Two types of vectors
+Atomic vector 及 List
+
+
+list中可以有list
+```{r}
+a<-c(
+  a1=1,
+  a2=2,
+  a3=3
+)
+typeof(a)
+b1<-list("a","b",c(1:10))
+typeof(b1)
+```
+
+```{r}
+studentRecord <-
+  list(
+    學號="410073058",
+    姓名="王小明",
+    性別="男",
+    學年平均成績=list(
+      一年級=88,
+      二年級=90.3,
+      三年級=92,
+      四年級=95
+    )
+  )
+```
+
+[[.]]用來取出所要的「一個」元素  同$.(只能用在list vector)
+ex.
+1.請取出姓名元素。
+```{r}
+studentRecord[[2]]
+```
+2.請取出三年級學年平均成績。
+```{r}
+studentRecord[[4]][[3]]
+class(studentRecord[[4]][[3]])
+```
+
+[.]用來取出所要的「一群」元素
+
+
+#str_split
+
+```{r}
+library(readr)
+library(stringr)
+filmVotingData <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/podcastcompetition3.csv")
+str_replace(filmVotingData$請選擇你最喜歡的影片二部,", by"," by") -> favoriteTwo
+birthday <- filmVotingData$`出生西元年月日（驗證本人用）`
+timeStamp <- filmVotingData$Timestamp
+```
+註: favoriteTwo的每個元素是一位同學選出的兩部片片名，中間用逗號空一格分隔。
+birthday是出生日期。timeStamp是交作業時間。
+
+
+```{r}
+str_split(favoriteTwo,", ") -> favoriteTwoList # 將選擇的兩片split成兩個元素
+unlist(favoriteTwoList) -> allVotes # 將list堆疊成atomic vector
+table(allVotes) # 計算每個類別的次數
+```
+
+1.birthday只能有8位元，str_length()可計算每個元素的位元長度。請產生一個logical vector稱為logiCorrect，TRUE表示剛好8位元。
+```{r}
+logiCorrect <- str_length(birthday) ==8
+logiCorrect
+```
+
+2.只留下birthday輸入正確的人，請統計各別片名支持人數。
+```{r}
+rightFavor <- favoriteTwo[logiCorrect]
+sum(rightFavor=="別再轉台！了解電視市場問題就從經濟學開始 by Amor")
+```
+
+3.若只留下凌晨1點（含）到早上5點（含）的投票人，他們的出生年份統計為何。
+```{r}
+head(timeStamp)
+library(lubridate)
+timestamp <- mdy_hms(timeStamp)
+class(timestamp)
+hours <- str_sub(timestamp,11,12)
+```
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
