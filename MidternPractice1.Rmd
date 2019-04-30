@@ -1,0 +1,140 @@
+---
+title: "midtern-practice1"
+output: html_document
+---
+
+#創造物件 #class類別 #logical邏輯 #factor類別 #levels #as.integer
+
+
+四
+
+#創造一個物件 
+
+----將object設置為2
+```{r}
+object <- 2
+2 ->object
+object
+```
+----object不是單一元素
+```{r}
+object1 <- c(1,3,5)
+object1
+```
+----元素不為數字
+```{r}
+object2 <- "你好"
+object2
+```
+
+#查詢類別
+```{r}
+class(object)
+class(object1)
+class(object2)
+```
+
+#Logical邏輯
+
+是與否
+```{r}
+logical <- c(T,F,F,T,F)
+class(logical)
+```
+作運算時,T視作1,F視作0
+```{r}
+sum(logical)
+```
+
+#FACTOR類別 LEVELS查詢類別數量
+factor為各元素的類別
+```{r}
+studentMajor <- factor(c("經濟系","法律系","經濟系"))
+```
+levels可看資料中的類別有哪些(法律存為1,經濟存為2)
+```{r}
+levels(studentMajor)
+```
+```{r}
+typeof(studentMajor)
+```
+```{r}
+studentMajor
+```
+真正儲存是以數字型式,如下:
+
+as.integer會把物件的class轉為integer
+```{r}
+as.integer(studentMajor)
+```
+
+
+#Date and Time時間日期
+
+以經度0度的1970年1月1日0點0時0秒為相對點，所有的時間都是以和它的秒差記錄---UTC時間
+>lubridate 套件
+
+叫出lubridate(記得先載)
+```{r}
+library(lubridate)
+```
+產生一個DateTime物件
+```{r}
+dtObject <- ymd_hms("1970-01-01 00:02:53")
+dtObject
+class(dtObject)
+```
+將時區由經度0度調整為台灣時區twDateTime
+```{r}
+twDateTime <- ymd_hms("2019-03-18 14:04:00", tz="Asia/Taipei")
+twDateTime
+```
+和經度0度1970-01-01 00:00:00所相差秒數
+```{r}
+as.integer(twDateTime)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
