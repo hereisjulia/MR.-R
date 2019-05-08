@@ -1,0 +1,85 @@
+---
+title: "midternPractice4"
+output: html_document
+---
+
+
+一
+```{r}
+class(2L)
+a <- c(2L,'a',3.0,4)
+a
+```
+
+
+二
+
+請將西元年(Year)轉成民國年份
+```{r}
+library(readr)
+library(stringr)
+library(lubridate)
+TyphoonData <- read_csv("https://raw.githubusercontent.com/GaryLKL/course-programming-for-ds-Quiz/master/TyphoonData.csv", col_types = cols(.default = col_character()))
+Year <- TyphoonData$年份
+
+Year <- as.character(Year)
+class(Year)
+Year <- as.integer(Year) - 1911
+head(Year)
+```
+在時間的前後加上『民國』、『年』
+```{r}
+head(str_c("民國",Year, "年"))
+```
+哪一個月發布颱風警報的頻率最高?(變數Time為發布警報的時間)
+#8月
+
+```{r}
+Time <- (TyphoonData[[10]])
+head(Time)
+alarmMonth <- str_sub(Time, 6, 7)
+table(alarmMonth)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -138,7 +138,12 @@ transcriptPartialData
 
 3.4 創立一個新的list答案物件叫transcriptPartialDataEcon，裡頭有“學號”,“學分數”,“必選修類別（必∕選∕通）”三個元素名稱，各別元素內容來自transcirptPartialData中所對應的變數名稱，但只保留來自經濟學系學生的資料（我們稱transcriptPartialDataEcon為transcriptData的子樣本）。 (hint: 活用3.2題結果) （最後一行最忘了打答案物件）
 ```{r}
-transcriptData[]
+transcriptPartialDataEcon <- list(
+  "學號"=transcriptData$學號[logicFromEcon]
+  "學分數"=transcriptData$學分數[logicFromEcon]
+  “必選修類別(必/選/通)”=transcriptData$`必選修類別（必∕選∕通）`[logicFromEcon]
+)
+transcriptPartialDataEcon
 ```
 
 
