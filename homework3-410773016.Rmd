@@ -87,7 +87,9 @@ only1LossCompanies
 ### 1.4 子樣本
 本題物件為data frame class，使用`[.R,.C]`選出符合上題條件的子樣本，存成data frame class的答案物件subsample。
 ```{r ans14}
-# subsample
+subsample <- data.frame(
+  公司名稱 = event$公司名稱)
+subsample
 ```
 
 ## 2 展覽資訊
