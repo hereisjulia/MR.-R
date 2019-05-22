@@ -1,0 +1,83 @@
+---
+title: "2019-05-22"
+output: html_document
+---
+
+```{r}
+library(lubridate)
+library(stringr)
+library(dplyr)
+library(readr)
+library(purrr)
+```
+
+
+### 6.2 轉UTC
+請將每個「訂單時區之下單時間」依其「訂單時區」轉成UTC時間date time class（即POSIXct class）後，存在「UTC時間」對應的位置裡。最後一行請打本題答案物件invoiceList。
+```{r}
+library(readr)
+invoiceList <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/master/invoiceList.csv",
+col_types = cols(訂單時間.以訂單時區顯示. = col_character()))
+names(invoiceList)[[2]] <- "訂單時區之下單時間"
+```
+6.2 轉UTC
+請將每個「訂單時區之下單時間」依其「訂單時區」轉成UTC時間date time class（即POSIXct class）後，存在「UTC時間」對應的位置裡。最後一行請打本題答案物件invoiceList。
+```{r}
+nyLogical <- invoiceList$訂單時區 == "America/New_York"
+tpLogical <- invoiceList$訂單時區 == "Asia/Taipei"
+invoiceList$nyLogical <- nyLogical
+invoiceList$tpLogical <- tpLogical
+
+library(lubridate)
+nyDT <- ymd_hms(invoiceList$訂單時區之下單時間[nyLogical],
+        tz="America/New_York")
+tpDT <- ymd_hms(invoiceList$訂單時區之下單時間[tpLogical],
+        tz="Asia/Taipei")
+invoiceList$UTC時間[nyLogical] <- with_tz(nyDT,tz="UTC")
+invoiceList$UTC時間[tpLogical] <- with_tz(tpDT,tz="UTC")
+
+invoiceList
+```
+
+
+請把以America/New_York時區輸入的時間字串“1973-02-21 12:05:22”，轉成date time class，再改成Asia/Taipei時間顯示。
+```{r}
+ymd_hms_tzChange <- function(date, TZ1, TZ2){
+  nyDT2 <- ymd_hms(date, tz=TZ1)
+  tpDT2 <- with_tz(nyDT2, tz=TZ2)
+  return(tpDT2)
+  }
+
+ymd_hms_tzChange("1973-02-21 12:05:22", "America/New_York", "Asia/Taipei")
+```
+
+```{r}
+sample(99:103,15,replace = T)-> yy
+sample(1:12,replace=T)-> mm
+str_c("民國",str_pad(yy,3,"left","0"),"年",mm,"月") -> twDates
+twDates
+```
+
+```{r}
+library(stringr)
+date_convert_twYM <- function(twDates){
+  yyyy<-as.integer(str_extract(twDates,"(?<=(民國))[:digit:]+"))+1911
+  mm<-str_extract(twDates,"[:digit:]+(?=月)")
+  ans <- ymd(str_c(yyyy, mm, "01", sep="-"))
+  return(ans)
+  }
+
+date_convert_twYM
+```
+
+
+
+
+
+
+
+
+
+
+
+
