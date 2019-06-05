@@ -1,0 +1,60 @@
+---
+title: "MidternPractice6"
+output: html_document
+---
+
+#Function
+
+反覆執行的程序可定義成為函數function物件。
+
+>函數名稱 <- function(input1, input2,...){
+函數程序內容
+return(output)
+}
+
+ex.
+```{r}
+utility_cobb_douglass <- function(x,y,.alpha,.beta){
+  utilValue <- x^.alpha*y^.beta # 程序產生output值
+  return(utilValue) # 傳回output值
+}
+```
+
+```{r}
+class(utility_cobb_douglass)
+utility_cobb_douglass(1,2,0.5,0.8)
+```
+ex.
+供給函數：Qs=a+b∗P
+請寫一個供給函數supply_fun()，它有三個inputs：a,b及P; output為Qs。
+需求函數：Qd=c−d∗P
+請寫一個供給函數demand_fun()，它有三個inputs：c,d及P; output為Qd。
+```{r}
+supply_fun <- function(a,b,P){
+  Qs <- a+ (b*P)
+  return(Qs)
+}
+```
+
+```{r}
+demand_fun <- function(c,d,P){
+  Qd <- c- (d*P)
+  return(Qd)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
